@@ -6,6 +6,7 @@ from langchain.agents import (
     AgentExecutor,
 )
 from langchain_core.tools import Tool
+from langchain_ollama import ChatOllama
 from langchain_openai import ChatOpenAI
 from langchain_core.prompts import PromptTemplate
 from dotenv import load_dotenv
@@ -15,11 +16,13 @@ load_dotenv()
 
 
 def lookup(name: str) -> str:
-    llm = ChatOpenAI(
-        temperature=0,
-        model_name="gpt-4o-mini",
-        openai_api_key=os.environ["OPENAI_API_KEY"],
-    )
+    # llm = ChatOpenAI(
+    #     temperature=0,
+    #     model_name="gpt-4o-mini",
+    #     openai_api_key=os.environ["OPENAI_API_KEY"],
+    # )
+    llm = ChatOllama(model="llama3.2")
+
     template = """given the full name {name_of_person} I want you to get it me a link to their Linkedin profile page.
                           Your answer should contain only a URL"""
 
@@ -44,3 +47,6 @@ def lookup(name: str) -> str:
 
     linked_profile_url = result["output"]
     return linked_profile_url
+
+if __name__ == "__main__":
+    print(lookup(name="Eden Marco Udemy"))
