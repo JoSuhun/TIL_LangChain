@@ -46,7 +46,13 @@ def lookup(name: str) -> str:
     )
 
     linked_profile_url = result["output"]
-    return linked_profile_url
+
+    import re
+    match = re.search(r"https://www\.linkedin\.com/in/[^\s\"']+", linked_profile_url)
+    if match:
+        return match.group(0)
+    else:
+        raise ValueError("No valid LinkedIn profile URL found")
 
 if __name__ == "__main__":
     print(lookup(name="Eden Marco Udemy"))
