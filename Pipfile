@@ -4,10 +4,8 @@ verify_ssl = true
 name = "pypi"
 
 [packages]
-flask = "*"
 tweepy = "*"
 pylint = "*"
-black = "*"
 isort = "*"
 langchain-openai = "*"
 langchain-community = "*"
